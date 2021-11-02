@@ -34,7 +34,7 @@ const LANDING_QUERY = graphql`
 const IndexPage = () => {
   const { landingPage } = useStaticQuery(LANDING_QUERY);
   const sendAnalytics = (platform) => {
-    window.gtag("event", "appstore-intent", { platform });
+    window.gtag("event", "appstore_intent", { platform });
   };
   return (
     <div>
