@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
+import { Helmet } from "react-helmet";
 import AppStoreBadge from "../images/AppStoreBadge.svg";
 import GoogleStoreBadge from "../images/GoogleStoreBadge.png";
 import LandingBackgroundShape from "../images/LandingBackground.svg";
@@ -32,9 +33,19 @@ const LANDING_QUERY = graphql`
 // markup
 const IndexPage = () => {
   const { landingPage } = useStaticQuery(LANDING_QUERY);
+  const sendAnalytics = (platform) => {
+    window.gtag("event", "appstore-intent", { platform });
+  };
   return (
     <div>
       <header className="px-16 py-6">
+        <Helmet>
+          <script
+            async
+            data-uid="f376f49380"
+            src="https://successful-author-1806.ck.page/f376f49380/index.js"
+          ></script>
+        </Helmet>
         <span className="logo-text font-bold text-xl">FootRace App</span>
       </header>
       <main className="px-16 flex justify-between items-center">
@@ -53,12 +64,17 @@ const IndexPage = () => {
           <div className="appstore-buttons flex items-center">
             <a
               className="mr-12"
-              target="_blank"
-              href={landingPage.appleAppStoreLink}
+              data-formkit-toggle="f376f49380"
+              href="https://successful-author-1806.ck.page/f376f49380"
+              onClick={() => sendAnalytics("ios")}
             >
               <img className="h-[50px]" src={AppStoreBadge} />
             </a>
-            <a target="_blank" href={landingPage.googleAppStoreLink}>
+            <a
+              data-formkit-toggle="f376f49380"
+              href="https://successful-author-1806.ck.page/f376f49380"
+              onClick={() => sendAnalytics("android")}
+            >
               <img className="h-[50px]" src={GoogleStoreBadge} />
             </a>
           </div>
